@@ -1,4 +1,4 @@
-import db from "../database/database.js";  // Assuming you have a SQLite or other database connection
+import db from "../database/database.js"; // Assuming you have a SQLite or other database connection
 
 // Add a new notification
 const addNotification = (title, content, appName, callback) => {
@@ -16,10 +16,16 @@ const getNotifications = (callback) => {
   });
 };
 
+//delete notification
+const deleteNotification = (id, callback) => {
+  const query = `DELETE FROM notifications WHERE id =?`;
+  db.run(query, [id], callback);
+};
+
 // Mark notification as read
 const markAsRead = (id, callback) => {
   const query = `UPDATE notifications SET status = 'read' WHERE id = ?`;
   db.run(query, [id], callback);
 };
 
-export default { addNotification, getNotifications, markAsRead };
+export default { addNotification, getNotifications, deleteNotification, markAsRead };

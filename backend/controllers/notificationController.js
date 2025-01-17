@@ -17,6 +17,15 @@ const getAllNotifications = (req, res) => {
   });
 };
 
+//delete notification
+const deleteN = (req, res) => {
+  const { id } = req.params;
+  Notification.deleteNotification(id, (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(200).json({ message: "Notification deleted!" });
+  });
+}
+
 // Mark notification as read
 const markNotificationAsRead = (req, res) => {
   const { id } = req.params;
@@ -26,4 +35,4 @@ const markNotificationAsRead = (req, res) => {
   });
 };
 
-export default { createNotification, getAllNotifications, markNotificationAsRead };
+export default { createNotification, getAllNotifications, deleteN, markNotificationAsRead };
